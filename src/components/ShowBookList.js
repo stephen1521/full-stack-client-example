@@ -6,7 +6,7 @@ import BookCard from './BookCard';
 import { useState, useEffect } from 'react';
 
 
-const BACK_END_URL = "localhost:3000/api/books"
+const GET_ALL_BOOKS_ENDPOINT = "http://localhost:5001/api/books"
 
 function ShowBookList(props){
 
@@ -16,17 +16,17 @@ function ShowBookList(props){
   // after component is rendered 
   useEffect(() => {
     axios
-    .get(BACK_END_URL)
+    .get(GET_ALL_BOOKS_ENDPOINT)
     .then(res => {
-      setBooks(res);
+      setBooks(res.data);
     })
     .catch(err =>{
       console.log('Error from ShowBookList');
     })
-  })
+  }, [])
 
   let bookList;
-  //check if the books are not empty
+  // //check if the books are not empty
   if(!books) {
     bookList = "there is no book recored!";
   } else {
